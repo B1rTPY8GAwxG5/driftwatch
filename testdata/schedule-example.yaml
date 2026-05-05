@@ -1,0 +1,17 @@
+# Example driftwatch schedule configuration
+schedule:
+  interval: 60s
+  max_runs: 0  # 0 = unlimited
+
+services:
+  - name: api-server
+    image: myorg/api:v1.2.3
+    replicas: 3
+    env:
+      PORT: "8080"
+      LOG_LEVEL: info
+  - name: worker
+    image: myorg/worker:v1.0.0
+    replicas: 2
+    env:
+      QUEUE_URL: amqp://broker:5672
