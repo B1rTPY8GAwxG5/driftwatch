@@ -1,0 +1,13 @@
+# filter-example.yaml — example drift filter configuration
+#
+# Use this to restrict drift detection to specific kinds of changes.
+# Supported kinds: image, replicas, env
+
+filter:
+  kinds:
+    - image
+    - replicas
+  drop_empty: true
+
+# When drop_empty is true, services with no matching drift entries
+# are omitted from the final report output.
