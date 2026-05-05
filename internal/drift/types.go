@@ -1,49 +1,54 @@
 package drift
 
-// ServiceSpec defines the desired state of a service as declared in IaC.
-type ServiceSpec struct {
-	Name     string            `yaml:"name"`
-	Image    string            `yaml:"image"`
-	Replicas int               `yaml:"replicas"`
-	Env      map[string]string `yaml:"env"`
-	Ports    []int             `yaml:"ports"`
-}
-
-// ServiceState represents the actual running state of a deployed service.
-type ServiceState struct {
-	Name     string
-	Image    string
-	Replicas int
-	Env      map[string]string
-	Ports    []int
-}
-
-// DriftKind categorizes the type of detected drift.
+// DriftKind identifies the category of a detected drift.
 type DriftKind string
 
 const (
-	DriftKindImage    DriftKind = "image"
-	DriftKindReplicas DriftKind = "replicas"
-	DriftKindEnv      DriftKind = "env"
-	DriftKindPort     DriftKind = "port"
-	DriftKindMissing  DriftKind = "missing"
+	KindImage       DriftKind = "image"
+	KindReplicas    DriftKind = "replicas"
+	KindEnvVar      DriftKind = "env_var"
+	KindMissingEnv  DriftKind = "missing_env"
+	KindExtraEnv    DriftKind = "extra_env"
 )
 
-// DriftEntry describes a single drift finding between spec and live state.
+// DriftEntry describes a single field that has drifted.
 type DriftEntry struct {
-	Kind     DriftKind
-	Field    string
-	Expected string
-	Actual   string
+	Kind     DriftKind   `json:"kind"`
+	Field    string      `json:"field"`
+	Expected interface{} `json:"expected"`
+	Actual   interface{} `json:"actual"`
 }
 
-// DriftResult holds all drift entries found for a given service.
-type DriftResult struct {
-	ServiceName string
-	Entries     []DriftEntry
+// HasDrift returns true when the entry represents a real difference.
+func (e DriftEntry) HasDrift() bool {
+	return e.Expected != e.Actual
 }
 
-// HasDrift returns true if any drift entries were recorded.
-func (r DriftResult) HasDrift() bool {
+// DriftReport is the result of comparing a live service against its spec.
+type DriftReport struct {
+	Service string       `json:"service"`
+	Entries []DriftEntry `json:"entries"`
+}
+
+// HasDrift returns true when at least one entry was recorded.
+func (r *DriftReport) HasDrift() bool {
 	return len(r.Entries) > 0
+}
+
+// ServiceSpec is the declared desired state loaded from IaC definitions.
+type ServiceSpec struct {
+	Name     string            `yaml:"name"     json:"name"`
+	Image    string            `yaml:"image"    json:"image"`
+	Replicas int               `yaml:"replicas" json:"replicas"`
+	Env      map[string]string `yaml:"env"      json:"env"`
+}
+
+// ApplyDefaults fills in zero-value fields with sensible defaults.
+func (s *ServiceSpec) ApplyDefaults() {
+	if s.Replicas == 0 {
+		s.Replicas = 1
+	}
+	if s.Env == nil {
+		s.Env = make(map[string]string)
+	}
 }
