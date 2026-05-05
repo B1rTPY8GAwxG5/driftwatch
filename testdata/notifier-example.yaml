@@ -1,0 +1,10 @@
+# Example notifier configuration for driftwatch
+notifier:
+  level: drift_only   # Options: all, drift_only
+  sinks:
+    - type: stdout
+    - type: file
+      path: /var/log/driftwatch/alerts.log
+  filters:
+    - kind: image
+    - kind: replicas
