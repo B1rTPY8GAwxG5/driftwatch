@@ -1,0 +1,11 @@
+# Example service specification for driftwatch
+name: example-service
+image: myrepo/example:v1.2.3
+replicas: 2
+env:
+  LOG_LEVEL: warn
+  DATABASE_URL: postgres://db:5432/example
+  FEATURE_FLAGS: "true"
+ports:
+  - 8080
+  - 9090
