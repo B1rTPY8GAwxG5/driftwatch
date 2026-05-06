@@ -1,0 +1,22 @@
+# Example exporter configuration for driftwatch
+exporter:
+  format: json        # Supported: json, text
+  sink: stdout        # Supported: stdout, stderr, or a file path
+
+# Example usage:
+# An Exporter is created with a format and a writer (sink).
+# Each drift result is written as an ExportRecord containing:
+#   - service name
+#   - timestamp (UTC)
+#   - has_drift flag
+#   - drift entries (field, kind, declared, actual)
+#   - drift score
+#
+# JSON output example:
+# {
+#   "service": "api-gateway",
+#   "timestamp": "2024-01-15T10:00:00Z",
+#   "has_drift": true,
+#   "entries": [{"kind": "image", ...}],
+#   "score": 80
+# }
