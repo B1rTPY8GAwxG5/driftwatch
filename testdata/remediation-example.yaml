@@ -1,0 +1,15 @@
+# Example remediation plan output (informational)
+service: api
+actions:
+  - kind: image
+    service: api
+    description: 'Update image from "nginx:1.24" to "nginx:1.25"'
+    command: kubectl set image deployment/api app=nginx:1.25
+  - kind: replicas
+    service: api
+    description: Scale replicas from 1 to 3
+    command: kubectl scale deployment/api --replicas=3
+  - kind: env
+    service: api
+    description: 'Reconcile env var "LOG_LEVEL" (got debug, want info)'
+    command: ""
