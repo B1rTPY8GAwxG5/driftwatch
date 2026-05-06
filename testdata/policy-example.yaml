@@ -1,0 +1,15 @@
+policies:
+  - name: strict
+    rules:
+      - kind: image
+        action: block
+      - kind: replicas
+        action: block
+      - kind: env
+        action: warn
+  - name: audit
+    rules:
+      - kind: image
+        action: warn
+      - kind: replicas
+        action: warn
