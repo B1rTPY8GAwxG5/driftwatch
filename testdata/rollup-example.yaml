@@ -1,0 +1,17 @@
+# rollup-example.yaml — example multi-service drift rollup input
+services:
+  - name: api-gateway
+    image: nginx:1.25
+    replicas: 3
+    env:
+      LOG_LEVEL: info
+
+  - name: worker
+    image: myapp:2.1.0
+    replicas: 2
+    env:
+      QUEUE_URL: amqp://localhost
+
+  - name: scheduler
+    image: myapp:2.1.0
+    replicas: 1
