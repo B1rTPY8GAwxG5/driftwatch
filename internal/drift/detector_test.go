@@ -88,3 +88,18 @@ func TestCompare_MultipleDrifts(t *testing.T) {
 		t.Errorf("expected 3 drift results, got %d", len(results))
 	}
 }
+
+func TestCompare_MissingLabel(t *testing.T) {
+	d := NewDetector()
+	declared := baseService()
+	live := baseService()
+	delete(live.Labels, "team")
+
+	results := d.Compare(declared, live)
+	if len(results) != 1 {
+		t.Fatalf("expected 1 result, got %d", len(results))
+	}
+	if results[0].Status != StatusMissing {
+		t.Errorf("expected status missing, got %s", results[0].Status)
+	}
+}
