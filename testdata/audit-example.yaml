@@ -1,0 +1,16 @@
+# Example showing expected audit log output format for driftwatch.
+# Each entry records a single drift detection run for a service.
+
+service: api-server
+events:
+  - timestamp: "2024-01-15T10:00:00Z"
+    drifted: false
+    message: "no drift detected"
+  - timestamp: "2024-01-15T11:00:00Z"
+    drifted: true
+    message: "drift detected in 1 field(s)"
+    entries:
+      - kind: image
+        field: image
+        declared: "nginx:1.24"
+        observed: "nginx:1.25"
