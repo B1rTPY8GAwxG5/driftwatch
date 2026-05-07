@@ -1,0 +1,28 @@
+# pipeline-example.yaml — example configuration for a drift detection pipeline
+service:
+  name: payments-api
+  image: payments:v3.1
+  replicas: 3
+  env:
+    DB_HOST: db.internal
+    LOG_LEVEL: info
+
+pipeline:
+  filter:
+    exclude_kinds:
+      - env
+  suppression:
+    rules:
+      - service: payments-api
+        kind: replicas
+        expires_at: "2099-01-01T00:00:00Z"
+  policy:
+    rules:
+      - kind: image
+        action: block
+  stages:
+    - score
+    - label
+  labels:
+    environment: production
+    team: platform
