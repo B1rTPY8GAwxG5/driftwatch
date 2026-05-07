@@ -1,0 +1,14 @@
+# trend-example.yaml — example configuration for drift trend analysis
+service: payments
+window: 24h
+points:
+  - timestamp: "2024-01-01T00:00:00Z"
+    drift_count: 0
+  - timestamp: "2024-01-01T06:00:00Z"
+    drift_count: 1
+  - timestamp: "2024-01-01T12:00:00Z"
+    drift_count: 3
+  - timestamp: "2024-01-01T18:00:00Z"
+    drift_count: 2
+direction: decreasing
+delta: 2
