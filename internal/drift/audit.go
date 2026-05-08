@@ -48,6 +48,17 @@ func (a *AuditLog) Events() []AuditEvent {
 	return out
 }
 
+// EventsForService returns a copy of all recorded audit events for the given service name.
+func (a *AuditLog) EventsForService(service string) []AuditEvent {
+	var out []AuditEvent
+	for _, e := range a.events {
+		if e.Service == service {
+			out = append(out, e)
+		}
+	}
+	return out
+}
+
 // Len returns the number of recorded events.
 func (a *AuditLog) Len() int {
 	return len(a.events)
