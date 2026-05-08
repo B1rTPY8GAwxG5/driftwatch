@@ -1,0 +1,7 @@
+# Example webhook configuration for driftwatch
+webhook:
+  url: "https://hooks.example.com/drift-alerts"
+  timeout: "10s"
+  headers:
+    Authorization: "Bearer my-secret-token"
+    X-Source: "driftwatch"
