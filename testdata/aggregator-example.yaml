@@ -1,0 +1,19 @@
+# aggregator-example.yaml — example configuration for the drift aggregator feature
+
+aggregator:
+  # mode controls how drift is determined across multiple services:
+  #   any     - drift if at least one service is drifted (default)
+  #   all     - drift only if every service is drifted
+  #   summary - same as any, used for reporting purposes
+  mode: any
+
+services:
+  - name: api-gateway
+    image: myregistry/api-gateway:1.2.3
+    replicas: 3
+  - name: auth-service
+    image: myregistry/auth-service:0.9.1
+    replicas: 2
+  - name: billing-service
+    image: myregistry/billing-service:2.0.0
+    replicas: 1
