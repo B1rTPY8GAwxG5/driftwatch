@@ -1,0 +1,16 @@
+# Example dispatcher configuration for driftwatch
+#
+# mode: serial | parallel
+#   serial   - handlers are invoked one after another (default)
+#   parallel - handlers are invoked concurrently
+#
+# sinks: list of output targets for dispatched results
+#   supported values: stdout, stderr, or a file path
+#
+# on_drift: when true, only dispatch results where drift was detected
+
+mode: parallel
+sinks:
+  - stdout
+  - /var/log/driftwatch/dispatched.log
+on_drift: true
