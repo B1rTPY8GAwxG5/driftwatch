@@ -1,0 +1,8 @@
+# enricher-example.yaml — example enrichment context configuration
+environment: production
+cluster: eks-prod-us-east-1
+region: us-east-1
+annotations:
+  owner: platform-team
+  cost-center: "12345"
+  tier: critical
