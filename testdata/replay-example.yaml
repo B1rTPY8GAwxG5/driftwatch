@@ -1,0 +1,24 @@
+# replay-example.yaml — example replay configuration
+# Defines a set of historical drift events for offline replay and analysis.
+
+speed: 0.0  # 0 = instant playback; 1.0 = real-time; 0.5 = half-speed
+
+events:
+  - timestamp: "2024-01-01T00:00:00Z"
+    result:
+      service: payments
+      entries: []
+
+  - timestamp: "2024-01-01T01:00:00Z"
+    result:
+      service: payments
+      entries:
+        - kind: image
+          field: image
+          declared: "payments:v1.2.0"
+          observed: "payments:v1.1.9"
+
+  - timestamp: "2024-01-01T02:00:00Z"
+    result:
+      service: payments
+      entries: []
