@@ -1,0 +1,16 @@
+# Example checkpoint store configuration
+# Used to persist the last known run state per service.
+
+checkpoint:
+  dir: ".driftwatch/checkpoints"
+
+# After each detector run, a checkpoint is saved:
+#   service: api
+#   run_at: 2024-06-01T12:00:00Z
+#   drifted: true
+#   entry_count: 2
+#
+# Checkpoints enable:
+#   - Skipping re-alerts for unchanged drift state
+#   - Tracking last-seen drift per service
+#   - Resuming after process restart
