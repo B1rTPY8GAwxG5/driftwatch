@@ -1,0 +1,11 @@
+# Example pruner policy configuration
+# Used to control retention of historical drift results.
+
+pruner:
+  # max_age is the maximum age of a drift result before it is discarded.
+  # Supports Go duration strings: e.g. 24h, 48h, 72h.
+  max_age: 72h
+
+  # max_entries limits how many results are retained per service.
+  # Set to 0 for unlimited.
+  max_entries: 100
