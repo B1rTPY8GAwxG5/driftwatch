@@ -1,0 +1,5 @@
+# SlidingWindow configuration example
+# size: duration string for the rolling window (e.g. 5m, 1h)
+# max_items: maximum number of results retained in the window
+size: 5m
+max_items: 100
