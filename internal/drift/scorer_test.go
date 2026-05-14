@@ -82,3 +82,14 @@ func TestScoreResult_ServiceName(t *testing.T) {
 		t.Errorf("expected service %s, got %s", scoredResult.Service, score.Service)
 	}
 }
+
+func TestScoreResult_EmptyEntries(t *testing.T) {
+	result := DriftResult{Service: "empty-svc", Entries: []DriftEntry{}}
+	score := ScoreResult(result)
+	if score.Total != 0 {
+		t.Errorf("expected total 0 for empty entries, got %d", score.Total)
+	}
+	if score.Level != "clean" {
+		t.Errorf("expected level clean for empty entries, got %s", score.Level)
+	}
+}
