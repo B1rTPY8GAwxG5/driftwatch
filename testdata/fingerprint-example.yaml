@@ -1,0 +1,16 @@
+# fingerprint-example.yaml
+# Demonstrates fingerprinting configuration for driftwatch.
+
+fingerprint:
+  include_image: true
+  include_replicas: true
+  include_env: false  # exclude env vars from fingerprint to avoid noise from secrets
+
+# Services whose fingerprint changes trigger downstream alerting.
+services:
+  - name: api
+    image: nginx:1.24
+    replicas: 3
+  - name: worker
+    image: redis:6
+    replicas: 1
