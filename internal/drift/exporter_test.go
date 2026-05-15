@@ -115,3 +115,25 @@ func TestExporter_Export_Text_CleanStatus(t *testing.T) {
 		t.Errorf("expected status=clean in output, got: %s", out)
 	}
 }
+
+func TestExporter_Export_JSON_EntryFields(t *testing.T) {
+	var buf bytes.Buffer
+	e, _ := NewExporter(ExportFormatJSON, &buf)
+	if err := e.Export(exportedResult); err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	var rec ExportRecord
+	if err := json.Unmarshal(buf.Bytes(), &rec); err != nil {
+		t.Fatalf("invalid JSON output: %v", err)
+	}
+	entry := rec.Entries[0]
+	if entry.Field != "image" {
+		t.Errorf("expected field=image, got %s", entry.Field)
+	}
+	if entry.Declared != "nginx:1.24" {
+		t.Errorf("expected declared=nginx:1.24, got %s", entry.Declared)
+	}
+	if entry.Actual != "nginx:1.21" {
+		t.Errorf("expected actual=nginx:1.21, got %s", entry.Actual)
+	}
+}
