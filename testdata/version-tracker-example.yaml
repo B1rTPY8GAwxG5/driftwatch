@@ -1,0 +1,10 @@
+# version-tracker-example.yaml
+# Demonstrates VersionTracker configuration intent.
+# The tracker is constructed programmatically; this file
+# documents recommended settings for reference.
+
+version_tracker:
+  # max_age controls how long version history entries are retained.
+  # Entries older than this duration are evicted on the next Record call.
+  # Accepts Go duration strings: e.g. 1h, 30m, 24h.
+  max_age: 24h
