@@ -1,0 +1,10 @@
+# classifier-example.yaml — example classifier rule configuration for driftwatch
+rules:
+  - kind: image
+    field: image
+    category: container
+  - kind: replicas
+    field: replicas
+    category: scaling
+  - kind: env
+    category: configuration
