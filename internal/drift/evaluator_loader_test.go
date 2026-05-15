@@ -98,3 +98,23 @@ func TestBuildEvaluator_MaxEntries_Respected(t *testing.T) {
 		t.Error("expected failure when entries exceed max")
 	}
 }
+
+func TestBuildEvaluator_MaxEntries_BelowMax_NoFailure(t *testing.T) {
+	cfg := &EvaluatorConfig{
+		Rules: []EvaluatorRuleConfig{{Name: "cap", Kind: "max_entries", Max: 3}},
+	}
+	e, err := BuildEvaluator(cfg)
+	if err != nil {
+		t.Fatalf("unexpected error building evaluator: %v", err)
+	}
+	result := DriftResult{
+		Service: "svc",
+		Entries: []DriftEntry{
+			{Kind: KindImage},
+		},
+	}
+	out := e.Evaluate(result)
+	if out.HasFailures() {
+		t.Errorf("expected no failures when entries are below max, got %v", out.Failed)
+	}
+}
