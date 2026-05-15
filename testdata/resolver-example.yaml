@@ -1,0 +1,9 @@
+# resolver-example.yaml — example configuration for the Resolver module
+#
+# strategy controls how duplicate drift entries (same kind + field) are merged.
+#   latest    — keep the most recently detected entry  (default)
+#   earliest  — keep the first detected entry
+#   severest  — keep the entry whose DriftKind has the highest severity rank
+
+resolver:
+  strategy: latest
