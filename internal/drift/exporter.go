@@ -64,6 +64,18 @@ func (e *Exporter) Export(result DriftResult) error {
 	return nil
 }
 
+// ExportAll writes multiple DriftResults to the exporter's writer in sequence.
+// It returns the first error encountered, along with the number of records
+// successfully written before the failure.
+func (e *Exporter) ExportAll(results []DriftResult) (int, error) {
+	for i, result := range results {
+		if err := e.Export(result); err != nil {
+			return i, fmt.Errorf("exporter: failed on record %d (service %q): %w", i, result.Service, err)
+		}
+	}
+	return len(results), nil
+}
+
 func (e *Exporter) writeJSON(rec ExportRecord) error {
 	enc := json.NewEncoder(e.writer)
 	enc.SetIndent("", "  ")
