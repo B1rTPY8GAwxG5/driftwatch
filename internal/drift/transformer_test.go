@@ -59,6 +59,14 @@ func TestTransformer_TransformAll_Length(t *testing.T) {
 	}
 }
 
+func TestTransformer_TransformAll_Empty(t *testing.T) {
+	tr := NewTransformer(NormaliseServiceName())
+	out := tr.TransformAll([]DriftResult{})
+	if len(out) != 0 {
+		t.Errorf("expected 0 results, got %d", len(out))
+	}
+}
+
 func TestNormaliseServiceName(t *testing.T) {
 	tr := NewTransformer(NormaliseServiceName())
 	r := baseTransformResult()
