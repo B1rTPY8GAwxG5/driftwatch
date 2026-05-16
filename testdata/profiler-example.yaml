@@ -1,0 +1,5 @@
+# DriftProfiler configuration example
+# max_size controls the maximum number of profile entries retained in memory.
+# When the limit is reached the oldest entry is evicted.
+# A value of 0 uses the default of 256.
+max_size: 128
