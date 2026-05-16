@@ -1,0 +1,14 @@
+# Signal bus configuration example for driftwatch
+# Used in integration tests and documentation.
+
+bus:
+  # static labels attached to every emitted signal
+  labels:
+    env: production
+    team: platform
+
+  # handlers to invoke on signal receipt
+  handlers:
+    - type: log
+    - type: webhook
+      url: https://hooks.example.com/drift
