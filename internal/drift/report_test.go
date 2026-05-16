@@ -46,6 +46,20 @@ func TestReport_Summary_WithDrift(t *testing.T) {
 	}
 }
 
+func TestReport_Summary_MultipleFields(t *testing.T) {
+	r := &Report{
+		Service: "api",
+		Results: []DriftResult{
+			{Field: "image", Status: StatusDrifted, Declared: "v1", Live: "v2"},
+			{Field: "replicas", Status: StatusDrifted, Declared: "2", Live: "3"},
+		},
+	}
+	summary := r.Summary()
+	if !strings.Contains(summary, "2 field") {
+		t.Errorf("expected '2 field' in summary, got: %s", summary)
+	}
+}
+
 func TestReport_WriteTo_NoDrift(t *testing.T) {
 	r := &Report{Service: "api", Results: nil}
 	var buf bytes.Buffer
