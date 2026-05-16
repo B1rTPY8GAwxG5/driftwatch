@@ -82,6 +82,20 @@ func (vt *VersionTracker) HasChanged(service, field, current string) bool {
 	return entries[len(entries)-1].Value != current
 }
 
+// Latest returns the most recently recorded VersionEntry for the given service
+// and field, and a boolean indicating whether any entry was found.
+func (vt *VersionTracker) Latest(service, field string) (VersionEntry, bool) {
+	vt.mu.Lock()
+	defer vt.mu.Unlock()
+
+	key := versionKey(service, field)
+	entries := vt.history[key]
+	if len(entries) == 0 {
+		return VersionEntry{}, false
+	}
+	return entries[len(entries)-1], true
+}
+
 // evict removes entries older than maxAge. Must be called with mu held.
 func (vt *VersionTracker) evict(now time.Time) {
 	cutoff := now.Add(-vt.maxAge)
