@@ -1,0 +1,8 @@
+# watchdog configuration example
+# Controls how driftwatch monitors detector liveness.
+watchdog:
+  # max_silence is the maximum time without a detector ping before an alert
+  # is emitted. Supports Go duration strings (e.g. "5m", "30s").
+  max_silence: 5m
+  # check_interval is how often the watchdog inspects the last-seen timestamp.
+  check_interval: 30s
