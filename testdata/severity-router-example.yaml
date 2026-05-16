@@ -1,0 +1,14 @@
+# severity-router-example.yaml
+# Configures the SeverityRouter used in driftwatch pipelines.
+
+fallback: "log"
+
+routes:
+  - severity: critical
+    dest: pagerduty
+  - severity: high
+    dest: opsgenie
+  - severity: medium
+    dest: email
+  - severity: low
+    dest: slack
