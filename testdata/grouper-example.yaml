@@ -1,0 +1,10 @@
+# grouper-example.yaml — example configuration for the Grouper feature
+#
+# mode controls how DriftResults are partitioned into groups.
+# Valid values: service | kind | severity
+#
+# service  — one group per service name (default)
+# kind     — one group per drift kind (image, replicas, env)
+# severity — one group per score level (info, warning, critical)
+
+mode: service
