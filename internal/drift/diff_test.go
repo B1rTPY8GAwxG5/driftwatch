@@ -97,3 +97,15 @@ func TestDiff_ExtraEnvInLive(t *testing.T) {
 		t.Errorf("expected diff to mention 'env.EXTRA', got %q", result[0])
 	}
 }
+
+func TestDiff_MultipleChanges(t *testing.T) {
+	a := specA()
+	b := specA()
+	b.Image = "myapp:2.0"
+	b.Replicas = 5
+	b.Env["PORT"] = "9090"
+	result := Diff(a, b)
+	if len(result) != 3 {
+		t.Fatalf("expected 3 diffs, got %d: %v", len(result), result)
+	}
+}
