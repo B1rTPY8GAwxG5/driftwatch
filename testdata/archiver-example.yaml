@@ -1,0 +1,4 @@
+# archiver configuration example
+archiver:
+  dir: data/archive
+  max_age: 720h  # 30 days
