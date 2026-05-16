@@ -1,0 +1,19 @@
+# scorecard-example.yaml — example scorecard configuration
+#
+# The ScorecardBuilder accepts any slice of DriftResults and
+# produces a graded summary suitable for dashboards or reports.
+#
+# Grade bands:
+#   A  90-100   no or negligible drift
+#   B  75-89    minor drift detected
+#   C  60-74    moderate drift
+#   D  40-59    significant drift
+#   F  0-39     critical drift
+
+services:
+  - name: api-gateway
+    expected_grade: A
+  - name: payment-service
+    expected_grade: B
+  - name: legacy-worker
+    expected_grade: C
