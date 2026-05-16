@@ -1,0 +1,9 @@
+# staleness-example.yaml — example configuration for StalenessChecker
+#
+# These thresholds control when a drift result is considered warn or stale.
+# Results older than warn_after but younger than stale_after are flagged as warn.
+# Results older than stale_after are flagged as stale.
+
+staleness:
+  warn_after: 5m
+  stale_after: 15m
