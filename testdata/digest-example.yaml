@@ -1,0 +1,5 @@
+# digest-example.yaml — example configuration for Digester options
+digester:
+  include_env: true
+  include_replicas: true
+  include_image: true
