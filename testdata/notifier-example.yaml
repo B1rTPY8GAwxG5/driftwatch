@@ -5,6 +5,14 @@ notifier:
     - type: stdout
     - type: file
       path: /var/log/driftwatch/alerts.log
+      # Rotate log file when it reaches 100MB
+      max_size_mb: 100
+      # Keep up to 7 rotated log files
+      max_backups: 7
   filters:
     - kind: image
     - kind: replicas
+    # Ignore namespaces that are known to drift intentionally
+    exclude_namespaces:
+      - kube-system
+      - monitoring
