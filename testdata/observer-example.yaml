@@ -1,0 +1,5 @@
+# observer-example.yaml
+# Configuration for the drift Observer.
+
+buffer_events: true
+max_events: 200
