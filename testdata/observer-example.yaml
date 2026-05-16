@@ -1,5 +1,13 @@
 # observer-example.yaml
 # Configuration for the drift Observer.
+#
+# buffer_events: whether to buffer events before processing (bool)
+# max_events:    maximum number of events to hold in the buffer before
+#                flushing or dropping; only used when buffer_events is true
+# poll_interval: how often (in seconds) the observer polls for drift (int)
+# log_level:     verbosity of observer logging (debug|info|warn|error)
 
 buffer_events: true
 max_events: 200
+poll_interval: 30
+log_level: info
