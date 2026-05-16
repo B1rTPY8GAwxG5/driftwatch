@@ -1,0 +1,7 @@
+# quota-example.yaml — example QuotaEnforcer configuration
+#
+# limit: maximum number of drift events allowed per service within the period.
+# period: one of "minute", "hour", or "day".
+
+limit: 50
+period: hour
