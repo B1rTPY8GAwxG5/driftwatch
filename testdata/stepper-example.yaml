@@ -1,0 +1,19 @@
+# stepper-example.yaml — illustrates a drift response workflow for documentation purposes
+service: payments-api
+steps:
+  - kind: detect
+    name: run-detector
+    duration: 12ms
+    error: ""
+  - kind: evaluate
+    name: policy-check
+    duration: 3ms
+    error: ""
+  - kind: notify
+    name: send-webhook
+    duration: 45ms
+    error: ""
+  - kind: remediate
+    name: apply-patch
+    duration: 0ms
+    skipped: true
