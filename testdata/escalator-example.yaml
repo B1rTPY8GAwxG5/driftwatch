@@ -1,0 +1,6 @@
+# escalator-example.yaml — example EscalationPolicy configuration
+#
+# Controls how long drift must persist before it is escalated.
+
+warn_after: 5m      # emit a warning-level escalation after 5 minutes of continuous drift
+critical_after: 30m # emit a critical-level escalation after 30 minutes of continuous drift
