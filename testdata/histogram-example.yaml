@@ -1,0 +1,7 @@
+# histogram-example.yaml — example configuration for DriftHistogram usage
+#
+# bucket_size controls the width of each time bucket.
+# Supported units: s (seconds), m (minutes), h (hours).
+
+histogram:
+  bucket_size: 1h
