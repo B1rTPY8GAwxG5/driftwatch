@@ -83,6 +83,19 @@ func TestFingerprintStore_Delete_RemovesEntry(t *testing.T) {
 	}
 }
 
+func TestFingerprintStore_Delete_AfterDeleteNotChanged(t *testing.T) {
+	// After deleting and re-recording the same result, it should be treated as
+	// changed again since the fingerprint was cleared.
+	s := NewFingerprintStore(nil)
+	r := makeStoreResult("api")
+	s.Record(r)
+	s.Delete("api")
+	changed := s.Record(r)
+	if !changed {
+		t.Fatal("expected changed=true after Delete and re-record")
+	}
+}
+
 func TestFingerprintStore_Flush_ClearsAll(t *testing.T) {
 	s := NewFingerprintStore(nil)
 	s.Record(makeStoreResult("api"))
