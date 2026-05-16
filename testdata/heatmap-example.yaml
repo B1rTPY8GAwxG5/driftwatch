@@ -1,0 +1,12 @@
+# DriftHeatmap usage example
+# The heatmap records drift events per service per hourly bucket.
+# Use Record() to ingest DriftResult values, then WriteTo() to render.
+#
+# Example integration:
+#   heatmap: internal/drift.NewDriftHeatmap
+#   record_on: drift_detected
+#   output:
+#     sink: stdout
+#   description: >
+#     Tracks how frequently each service drifts across hourly windows.
+#     Useful for identifying noisy services or recurring drift patterns.
