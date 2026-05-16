@@ -9,3 +9,8 @@ pruner:
   # max_entries limits how many results are retained per service.
   # Set to 0 for unlimited.
   max_entries: 100
+
+  # dry_run controls whether the pruner actually deletes records or only
+  # logs what it would delete. Useful for validating policy before enabling.
+  # Defaults to false.
+  dry_run: false
