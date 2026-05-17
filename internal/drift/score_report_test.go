@@ -74,3 +74,15 @@ func TestScoreReport_WriteTo_ContainsService(t *testing.T) {
 		t.Errorf("expected level critical in output, got: %s", buf.String())
 	}
 }
+
+func TestBuildScoreReport_ScoreCount(t *testing.T) {
+	results := []DriftResult{
+		makeResult("svc-a", DriftKindImage),
+		makeResult("svc-b", DriftKindEnv),
+		makeResult("svc-c", DriftKindReplicas),
+	}
+	report := BuildScoreReport(results)
+	if len(report.Scores) != len(results) {
+		t.Errorf("expected %d scores, got %d", len(results), len(report.Scores))
+	}
+}
