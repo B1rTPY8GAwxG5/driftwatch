@@ -82,6 +82,25 @@ func TestPruner_Prune_EnforcesMaxEntries(t *testing.T) {
 	}
 }
 
+func TestPruner_Prune_MaxEntriesZeroMeansNoLimit(t *testing.T) {
+	// MaxEntries == 0 should be treated as no entry limit.
+	policy := PrunePolicy{MaxAge: time.Hour, MaxEntries: 0}
+	pr := NewPruner(policy)
+
+	results := []DriftResult{
+		makePrunerResult("svc-d", 5*time.Minute, true),
+		makePrunerResult("svc-d", 10*time.Minute, true),
+		makePrunerResult("svc-d", 15*time.Minute, true),
+		makePrunerResult("svc-d", 20*time.Minute, true),
+		makePrunerResult("svc-d", 25*time.Minute, true),
+	}
+
+	out := pr.Prune(results)
+	if len(out) != 5 {
+		t.Fatalf("expected all 5 results when MaxEntries=0, got %d", len(out))
+	}
+}
+
 func TestPruner_PruneAll_FlattensAndPrunes(t *testing.T) {
 	policy := PrunePolicy{MaxAge: time.Hour, MaxEntries: 0}
 	pr := NewPruner(policy)
