@@ -1,0 +1,4 @@
+# Batcher configuration example
+batcher:
+  max_size: 50       # flush when this many results accumulate
+  max_wait: 10s      # flush after this duration even if max_size not reached
