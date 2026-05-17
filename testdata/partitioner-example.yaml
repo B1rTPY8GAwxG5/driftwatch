@@ -1,0 +1,10 @@
+# partitioner-example.yaml
+# Demonstrates partitioner configuration for driftwatch.
+
+partitioner:
+  # mode controls how drift results are split into buckets.
+  # Accepted values: drifted | clean | kind
+  # - drifted: two buckets — "drifted" and "clean" (default)
+  # - clean:   same two buckets but clean-first ordering
+  # - kind:    one bucket per drift kind (image, replicas, env, …)
+  mode: drifted
