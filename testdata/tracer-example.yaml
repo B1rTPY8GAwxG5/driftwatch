@@ -1,0 +1,14 @@
+# tracer-example.yaml — illustrates how trace events are structured
+# when emitted by the drift pipeline stages.
+
+service: payments-api
+stages:
+  - name: detect
+    duration_ms: 12
+    error: ""
+  - name: compare
+    duration_ms: 8
+    error: ""
+  - name: score
+    duration_ms: 3
+    error: ""
