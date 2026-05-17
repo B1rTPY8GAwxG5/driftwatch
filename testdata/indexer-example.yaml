@@ -1,0 +1,8 @@
+# indexer-example.yaml
+# Configuration for the DriftIndex component.
+#
+# mode controls how DriftResults are keyed in the index:
+#   service  - indexed by service name (default)
+#   kind     - indexed by drift kind (image, replicas, env)
+#   both     - indexed by service name AND composite service::kind keys
+mode: both
